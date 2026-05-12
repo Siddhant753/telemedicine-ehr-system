@@ -38,6 +38,7 @@ export const signupController = async (req: Request, res: Response, nxt: NextFun
         const verificationLink = `${process.env.FRONTEND_URL}/verify-email?token=${rawToken}`;
 
         // email sending logic here using nodemailer or any email service provider
+        console.log(`Verification link (send this via email): ${verificationLink}`);  // For testing purposes, we log the link. In production, you would send this via email.
         res.status(201).json({ message: "User created successfully, please verify your email" });
     } catch (err) {
         nxt(err);
@@ -56,7 +57,7 @@ export const verifyEmailController = async (req: Request, res: Response, nxt: Ne
         if (!user) return nxt(createError("Invalid or expired token", 400));
 
         // Optionally, you can generate a JWT token here for immediate login after verification
-        
+    
         res.status(200).json({ message: "Email verified successfully." });
     } catch (err) {
         nxt(err);
@@ -88,6 +89,8 @@ export const loginController = async (req: Request, res: Response, nxt: NextFunc
             maxAge: 1000 * 60 * 60 * 24 * 30
         })
 
+        console.log(`Access Token: ${accessToken}`); // For testing purposes, log the access token. In production, you would not do this.
+        console.log(`Refresh Token: ${refreshToken}`); // For testing purposes, log the refresh token. In production, you would not do this.
         return res.status(200).json({ message: "Login successful", accessToken, user });
     } catch (err) {
         nxt(err);
@@ -186,17 +189,5 @@ export const getCurrentUserController = async (req: Request, res: Response, nxt:
         return res.status(200).json({ success: true, message: "User data fetched successfully", user });
     } catch (error) {
         return nxt(createError("User not found", 404));
-    }
-}
-
-export const getDoctorDetailsController = async (req: Request, res: Response, nxt: NextFunction) => {
-    try {
-        const id = req.user?.id as string;
-        const doctorDetails = await DoctorDetailsModel.findOne({ userId: id });
-        if (!doctorDetails) return nxt(createError("Doctor details not found", 404));
-
-        return res.status(200).json({ success: true, message: "Doctor details fetched successfully", doctorDetails });
-    } catch (error) {
-        return nxt(createError("Error fetching doctor details", 500));
     }
 }
