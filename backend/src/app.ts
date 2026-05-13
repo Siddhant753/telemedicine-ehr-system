@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 
 import authRouter from './routes/auth.routes';
 import docRouter from './routes/doctor.routes';
+import appointmentRouter from './routes/appointment.routes';
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/doctors', docRouter);
+app.use('/api/appointments', appointmentRouter);
 
 export default app;

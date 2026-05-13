@@ -42,3 +42,8 @@ export const verifyRefreshToken = async (token: string): Promise<JwtUserPayload>
 
     return decoded;
 }
+
+export const generateRoomToken = (userId: string, appointmentId: string, roomId: string): string => {
+    const payload = { userId, appointmentId, roomId };
+    return jwt.sign(payload, process.env.SECRET_ROOM_TOKEN_KEY as string, { expiresIn: '2h' });
+}

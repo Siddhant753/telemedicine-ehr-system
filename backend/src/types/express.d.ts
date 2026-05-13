@@ -3,7 +3,7 @@ import "express";
 
 interface JwtUserPayload {
     id: string;
-    role: "admin" | "manager" | "cashier";
+    role: "admin" | "patient" | "doctor" ;
 }
 
 declare module "express-serve-static-core" {
