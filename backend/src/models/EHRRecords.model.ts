@@ -10,6 +10,18 @@ export interface IEHRRecord extends Document {
     dateOfRecord: Date;
     description: string;
     attachments: string[];
+    encryptedData: {
+        chiefComplaint: { type: String },
+        diagnosis:      { type: String },
+        symptoms:       { type: String },
+        medications:    { type: String },
+        allergies:      { type: String },
+        vitalSigns:     { type: String },
+        notes:          { type: String },
+        labResults:     { type: String },
+        imagingResults: { type: String },
+        treatmentPlan:  { type: String },
+    },
     createdAt: Date;
     updatedAt: Date;
 }
@@ -22,7 +34,19 @@ const EHRRecordSchema = new Schema<IEHRRecord>({
     appointmentId: { type: Schema.Types.ObjectId, ref: "Appointment", required: true },
     dateOfRecord: { type: Date, required: true, default: Date.now },
     description: { type: String, default: "" },
-    attachments: { type: [String], default: [] }
+    attachments: { type: [String], default: [] },
+    encryptedData: {
+        chiefComplaint: { type: String },
+        diagnosis:      { type: String },
+        symptoms:       { type: String },
+        medications:    { type: String },
+        allergies:      { type: String },
+        vitalSigns:     { type: String },
+        notes:          { type: String },
+        labResults:     { type: String },
+        imagingResults: { type: String },
+        treatmentPlan:  { type: String },
+    }
 }, { timestamps: true });
 
 EHRRecordSchema.index({ patientId: 1, dateOfRecord: -1 });

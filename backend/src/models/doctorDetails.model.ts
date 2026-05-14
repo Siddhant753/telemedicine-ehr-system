@@ -25,7 +25,7 @@ const doctorDetailsSchema = new Schema<IDoctorDetails>({
     specialization:  { type: String, required: true },
     registrationNumber: { type: String, required: true, unique: true },
     qualifications:  { type: [String], default: [] },
-    experience: { type: Number, required: true },
+    experience: { type: Number, default: 0 },
     consultationFee: { type: Number, default: 0 },
     bio: { type: String },
     availability: {

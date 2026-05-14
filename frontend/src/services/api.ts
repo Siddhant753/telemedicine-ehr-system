@@ -194,8 +194,42 @@ export const isAuthenticated = (): boolean => {
 
 // Appointment API functions
 export const getAppointments = async (page = 1, limit = 5) => {
-    const response = await api.get("/get-doctor-appointments", { params: { page, limit } });
+    const response = await api.get("/appointments/get-doctor-appointments", { params: { page, limit } });
     return response.data;
 };
 
+export const updateAppointmentStatus = async (id: string, { status }: { status: string }) => {
+    const response = await api.put(`/appointments${id}/update-appointment`, { status });
+    return response.data;
+};
+
+export const getRoomToken = async (id: string) => {
+    const response = await api.get(`/appointments/${id}/appointment-room-token`);
+    return response.data;
+};
+
+export const getSlots = async (doctorId: string, date: string) => {
+    const response = await api.get(`/appointments/${doctorId}/available-slots`, { params: { date } });
+    return response.data;
+}
+export const bookAppointment = async (data: any) => {
+    const response = await api.post("/appointments/book-appointment", data);
+    return response.data;
+};
+
+// Doctor API functions
+export const getDoctors = async () => {
+    const response = await api.get("/doctors/get-all");
+    return response.data.data.doctors;
+}
+
+export const getDoctor = async (id: string) => {
+    const response = await api.get(`/doctors/get-doctor/${id}`);
+    return response.data;
+}
+
+export const updateDoctor = async (id: string, data: any) => {
+    const response = await api.put(`/doctors/update-doctor/${id}`, data);
+    return response.data;
+}
 export default api;

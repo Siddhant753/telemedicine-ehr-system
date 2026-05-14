@@ -14,3 +14,8 @@ export type Appointment = {
     timezone: string;
     createdAt: string;
 }
+
+export interface TimeSlot {
+    time: string;
+    available: boolean;
+}

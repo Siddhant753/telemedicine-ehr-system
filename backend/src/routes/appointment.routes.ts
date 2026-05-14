@@ -16,6 +16,6 @@ appointmentRouter.post('/book-appointment', roleMiddleware('patient'), bookAppoi
 appointmentRouter.get('/get-doctor-appointments', getDoctorAppointmentsController);
 appointmentRouter.put('/:id/update-appointment', roleMiddleware('doctor'), updateAppointmentController);
 appointmentRouter.get('/:id/appointment-room-token', getRoomTokenController);
-appointmentRouter.get('/doctors/:doctorId/available-slots', getDoctorAvailableSlotsController);
+appointmentRouter.get('/:doctorId/available-slots', getDoctorAvailableSlotsController);
 
 export default appointmentRouter;

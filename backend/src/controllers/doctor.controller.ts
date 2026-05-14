@@ -8,7 +8,7 @@ export const getDoctorsController = async (req: Request, res: Response, nxt: Nex
         const profiles = await DoctorDetailsModel.find({ userId: { $in: doctors.map(d => d._id) }});
 
         const result = doctors.map(doc => ({
-            ...doc.toJSON,
+            ...doc.toJSON(),
             profile: profiles.find(p => p.userId.toString() === doc._id.toString())
         }))
 

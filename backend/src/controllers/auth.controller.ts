@@ -89,8 +89,6 @@ export const loginController = async (req: Request, res: Response, nxt: NextFunc
             maxAge: 1000 * 60 * 60 * 24 * 30
         })
 
-        console.log(`Access Token: ${accessToken}`); // For testing purposes, log the access token. In production, you would not do this.
-        console.log(`Refresh Token: ${refreshToken}`); // For testing purposes, log the refresh token. In production, you would not do this.
         return res.status(200).json({ message: "Login successful", accessToken, user });
     } catch (err) {
         nxt(err);
